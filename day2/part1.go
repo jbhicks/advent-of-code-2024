@@ -9,23 +9,23 @@ import (
 )
 
 func Part1() int {
-	scanner := ReadInputFile("input-example")
+	scanner := ReadInputFile("input")
 	reports := ProcessInput(scanner)
+	count := 0
 
 	for i, v := range reports {
 		if isLineSafe(v) {
-			fmt.Println("Line", i, "is safe")
+			count++
+			fmt.Println(v, ":safe")
 		} else {
 			fmt.Println("Line", i, "is not safe")
 		}
 	}
 
-	result := 0
-	return result
+	return count
 }
 
 func isLineSafe(line string) bool {
-	fmt.Println(line)
 	// split the line into a slice of strings
 	var readings []int
 
@@ -38,23 +38,27 @@ func isLineSafe(line string) bool {
 	}
 	fmt.Println(readings)
 
-	if readings[0] == readings[1] {
-		return false
-	}
-
-	if readings[0] < readings[1] {
+	if readings[0] <= readings[1] {
 		for i := 1; i < len(readings)-1; i++ {
 			if readings[i] >= readings[i+1] {
-				fmt.Println("ASCENDING: ", readings[i], readings[i+1])
+				fmt.Println("NOT_ASCENDING_OR_EQUAL: ", readings[i], readings[i+1])
+				return false
+			}
+			if readings[i+1]-readings[i] > 3 {
+				fmt.Println("DISTANCE: ", readings[i], readings[i+1])
 				return false
 			}
 		}
 	}
 
-	if readings[0] > readings[1] {
+	if readings[0] >= readings[1] {
 		for i := 1; i < len(readings)-1; i++ {
 			if readings[i] <= readings[i+1] {
-				fmt.Println("DESCENDING: ", readings[i], readings[i+1])
+				fmt.Println("NOT_DESCENDING_OR_EQUAL: ", readings[i], readings[i+1])
+				return false
+			}
+			if readings[i]-readings[i+1] > 3 {
+				fmt.Println("DISTANCE: ", readings[i], readings[i+1])
 				return false
 			}
 		}

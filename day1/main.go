@@ -1,6 +1,8 @@
 package main
 
+import "fmt"
+
 func main() {
-	// Day1()
-	Day2()
+	fmt.Println("Part1:", Part1())
+	fmt.Println("Part2:", Part2())
 }

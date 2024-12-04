@@ -2,16 +2,17 @@ package main
 
 import (
 	"errors"
-	"fmt"
+
+	. "github.com/jbhicks/advent-of-code-2024/util"
 )
 
-func Day1() {
+func Part1() int {
 	scanner := ReadInputFile("input")
 	list1, list2, err := ProcessInput(scanner)
 	Check(err)
 	totalDistance, err := findTotalDistance(list1, list2)
 	Check(err)
-	fmt.Println("Total distance:", totalDistance)
+	return totalDistance
 }
 
 func findTotalDistance(list1 []int, list2 []int) (int, error) {
